@@ -77,7 +77,6 @@ class VistaClientes:
         # Botones
 
         botones = tk.Frame(frame)
-
         botones.pack(pady=10)
 
         self.btn_registrar = tk.Button(
@@ -86,8 +85,23 @@ class VistaClientes:
             width=15,
             command=self.registrar_cliente
         )
+        self.btn_registrar.grid(row=0, column=0, padx=5)
 
-        self.btn_registrar.pack(side="left", padx=5)
+        self.btn_modificar = tk.Button(
+            botones,
+            text="Modificar",
+            width=15,
+            command=self.modificar_cliente
+        )
+        self.btn_modificar.grid(row=0, column=1, padx=5)
+
+        self.btn_eliminar = tk.Button(
+            botones,
+            text="Eliminar",
+            width=15,
+            command=self.eliminar_cliente
+        )
+        self.btn_eliminar.grid(row=0, column=2, padx=5)
 
         self.btn_limpiar = tk.Button(
             botones,
@@ -95,8 +109,7 @@ class VistaClientes:
             width=15,
             command=self.limpiar
         )
-
-        self.btn_limpiar.pack(side="left", padx=5)
+        self.btn_limpiar.grid(row=0, column=3, padx=5)
 
         # Tabla 
 
@@ -122,6 +135,8 @@ class VistaClientes:
         self.tabla.heading("correo", text="Correo")
 
         self.tabla.pack(fill="both", expand=True, padx=20, pady=15)
+
+        self.tabla.bind("<<TreeviewSelect>>", self.seleccionar_cliente)
 
     def obtener_datos(self):
         """Obtiene la información escrita en el formulario."""
@@ -184,3 +199,52 @@ class VistaClientes:
         self.documento.delete(0, tk.END)
         self.telefono.delete(0, tk.END)
         self.correo.delete(0, tk.END)
+
+    def seleccionar_cliente(self, event):
+
+        seleccion = self.tabla.focus()
+
+        if not seleccion:
+            return
+
+        datos = self.tabla.item(seleccion)["values"]
+
+        self.limpiar()
+
+        self.codigo.insert(0, datos[0])
+        self.nombre.insert(0, datos[1])
+        self.documento.insert(0, datos[2])
+        self.telefono.insert(0, datos[3])
+        self.correo.insert(0, datos[4])
+
+
+    def modificar_cliente(self):
+
+        from tkinter import messagebox
+
+        messagebox.showinfo(
+            "Información",
+            "La función Modificar será implementada en el siguiente paso."
+        )
+
+
+    def eliminar_cliente(self):
+
+        from tkinter import messagebox
+
+        seleccion = self.tabla.focus()
+
+        if not seleccion:
+
+            messagebox.showwarning(
+                "Advertencia",
+                "Seleccione un cliente."
+            )
+            return
+
+        self.tabla.delete(seleccion)
+
+        messagebox.showinfo(
+            "Éxito",
+            "Cliente eliminado de la tabla."
+        )
