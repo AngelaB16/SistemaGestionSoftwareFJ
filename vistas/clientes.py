@@ -66,8 +66,6 @@ class VistaClientes:
 
         # Correo
 
-        tk.Label(formulario, text="Correo")
-
         tk.Label(formulario, text="Correo").grid(row=4, column=0, sticky="w")
 
         self.correo = tk.Entry(formulario, width=30)
@@ -248,3 +246,36 @@ class VistaClientes:
             "Éxito",
             "Cliente eliminado de la tabla."
         )
+
+    def eliminar_cliente(self):
+
+        seleccion = self.tabla.focus()
+
+        if not seleccion:
+            messagebox.showwarning(
+                "Advertencia",
+                "Seleccione un cliente."
+            )
+            return
+
+        datos = self.tabla.item(seleccion)["values"]
+
+        documento = datos[2]
+
+        try:
+
+            self.sistema.eliminar_cliente(documento)
+
+            self.tabla.delete(seleccion)
+
+            messagebox.showinfo(
+                "Éxito",
+                "Cliente eliminado correctamente."
+            )
+
+        except Exception as error:
+
+            messagebox.showerror(
+                "Error",
+                str(error)
+            )

@@ -36,6 +36,44 @@ class Sistema:
     def obtener_clientes(self):
 
         return self.clientes
+    
+    def buscar_cliente(self, documento):
+
+        for cliente in self.clientes:
+
+            if cliente.documento == documento:
+                return cliente
+
+        return None
+
+    def modificar_cliente(self, documento, nuevos_datos):
+
+        cliente = self.buscar_cliente(documento)
+
+        if cliente is None:
+            raise ClienteError("Cliente no encontrado.")
+
+        cliente.nombre = nuevos_datos["nombre"]
+        cliente.telefono = nuevos_datos["telefono"]
+        cliente.correo = nuevos_datos["correo"]
+
+        registrar_evento(
+            f"Cliente modificado: {cliente.nombre}"
+        )
+
+    def eliminar_cliente(self, documento):
+
+        cliente = self.buscar_cliente(documento)
+
+        if cliente is None:
+            raise ClienteError("Cliente no encontrado.")
+
+        self.clientes.remove(cliente)
+
+        registrar_evento(
+            f"Cliente eliminado: {cliente.nombre}"
+        )
+
 
     # SERVICIOS
 
