@@ -1,149 +1,47 @@
-# Librerias de Tkinter
+# Interfaz principal del Sistema Software FJ
+
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import ttk
 
-# Clases del proyecto
-from modelos.cliente import Cliente
+from vistas.clientes import VistaClientes
 
-# Registro de logs
-from logger_config import registrar_evento, registrar_error
+class InterfazPrincipal:
 
+    def __init__(self):
 
-# Lista donde se almacenan los clientes
-clientes = []
+        self.ventana = tk.Tk()
 
+        self.ventana.title("Sistema Integral de Gestión - Software FJ")
+        self.ventana.geometry("1100x700")
+        self.ventana.resizable(False, False)
 
-# Registrar cliente
-def registrar_cliente():
+        # Notebook (Pestañas)
+        self.notebook = ttk.Notebook(self.ventana)
 
-    try:
+        self.tab_clientes = ttk.Frame(self.notebook)
+        self.tab_servicios = ttk.Frame(self.notebook)
+        self.tab_reservas = ttk.Frame(self.notebook)
+        self.tab_reportes = ttk.Frame(self.notebook)
 
-        cliente = Cliente(
-            txt_codigo.get(),
-            txt_nombre.get(),
-            txt_documento.get(),
-            txt_telefono.get(),
-            txt_correo.get()
+        self.notebook.add(self.tab_clientes, text="Clientes")
+        self.notebook.add(self.tab_servicios, text="Servicios")
+        self.notebook.add(self.tab_reservas, text="Reservas")
+        self.notebook.add(self.tab_reportes, text="Reportes")
+
+        self.notebook.pack(expand=True, fill="both")
+        
+        # Cargar la vista
+        self.vista_clientes = VistaClientes(self.tab_clientes)
+
+        # Barra de estado
+        estado = tk.Label(
+            self.ventana,
+            text="Sistema listo",
+            anchor="w",
+            relief="sunken"
         )
 
-        clientes.append(cliente)
+        estado.pack(fill="x", side="bottom")
 
-    except Exception as error:
-
-        registrar_error(str(error))
-
-        messagebox.showerror(
-            "Error",
-            str(error)
-        )
-
-    else:
-
-        registrar_evento(
-            f"Cliente registrado: {cliente.nombre}"
-        )
-
-        messagebox.showinfo(
-            "Éxito",
-            "Cliente registrado correctamente."
-        )
-
-        limpiar()
-
-    finally:
-
-        actualizar_lista()
-
-
-# Mostrar clientes
-def actualizar_lista():
-
-    lista.delete(0, tk.END)
-
-    for cliente in clientes:
-
-        lista.insert(
-            tk.END,
-            f"{cliente.codigo} - {cliente.nombre}"
-        )
-
-
-# Limpiar cajas
-def limpiar():
-
-    txt_codigo.delete(0, tk.END)
-    txt_nombre.delete(0, tk.END)
-    txt_documento.delete(0, tk.END)
-    txt_telefono.delete(0, tk.END)
-    txt_correo.delete(0, tk.END)
-
-
-# Ventana principal
-
-ventana = tk.Tk()
-
-ventana.title("Sistema Gestión Software FJ")
-
-ventana.geometry("700x500")
-
-ventana.resizable(False, False)
-
-# Codigo
-
-tk.Label(ventana, text="Código").pack()
-
-txt_codigo = tk.Entry(ventana)
-
-txt_codigo.pack()
-
-# Nombre
-
-tk.Label(ventana, text="Nombre").pack()
-
-txt_nombre = tk.Entry(ventana)
-
-txt_nombre.pack()
-
-# Documento
-
-tk.Label(ventana, text="Documento").pack()
-
-txt_documento = tk.Entry(ventana)
-
-txt_documento.pack()
-
-# Telefono
-
-tk.Label(ventana, text="Teléfono").pack()
-
-txt_telefono = tk.Entry(ventana)
-
-txt_telefono.pack()
-
-# Correo
-
-tk.Label(ventana, text="Correo").pack()
-
-txt_correo = tk.Entry(ventana)
-
-txt_correo.pack()
-
-# Boton
-
-tk.Button(
-    ventana,
-    text="Registrar Cliente",
-    command=registrar_cliente
-).pack(pady=10)
-
-# Lista
-
-lista = tk.Listbox(
-    ventana,
-    width=70,
-    height=10
-)
-
-lista.pack()
-
-ventana.mainloop()
+    def ejecutar(self):
+        self.ventana.mainloop()
