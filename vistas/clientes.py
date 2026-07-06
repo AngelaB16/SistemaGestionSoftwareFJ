@@ -2,12 +2,13 @@
 
 import tkinter as tk
 from tkinter import ttk
-
+from tkinter import messagebox
+from modelos.cliente import Cliente
 
 class VistaClientes:
 
-    def __init__(self, frame):
-
+    def __init__(self, frame, sistema):
+        self.sistema = sistema
         self.frame = frame
 
         # Titulo 
@@ -79,9 +80,23 @@ class VistaClientes:
 
         botones.pack(pady=10)
 
-        tk.Button(botones, text="Registrar", width=15).pack(side="left", padx=5)
+        self.btn_registrar = tk.Button(
+            botones,
+            text="Registrar",
+            width=15,
+            command=self.registrar_cliente
+        )
 
-        tk.Button(botones, text="Limpiar", width=15).pack(side="left", padx=5)
+        self.btn_registrar.pack(side="left", padx=5)
+
+        self.btn_limpiar = tk.Button(
+            botones,
+            text="Limpiar",
+            width=15,
+            command=self.limpiar
+        )
+
+        self.btn_limpiar.pack(side="left", padx=5)
 
         # Tabla 
 
@@ -107,3 +122,65 @@ class VistaClientes:
         self.tabla.heading("correo", text="Correo")
 
         self.tabla.pack(fill="both", expand=True, padx=20, pady=15)
+
+    def obtener_datos(self):
+        """Obtiene la información escrita en el formulario."""
+
+        return {
+            "codigo": self.codigo.get(),
+            "nombre": self.nombre.get(),
+            "documento": self.documento.get(),
+            "telefono": self.telefono.get(),
+            "correo": self.correo.get()
+        }
+    
+    def registrar_cliente(self):
+
+        try:
+
+            datos = self.obtener_datos()
+
+            cliente = Cliente(
+                datos["codigo"],
+                datos["nombre"],
+                datos["documento"],
+                datos["telefono"],
+                datos["correo"]
+            )
+
+            self.sistema.agregar_cliente(cliente)
+
+            self.tabla.insert(
+                "",
+                "end",
+                values=(
+                    cliente.codigo,
+                    cliente.nombre,
+                    cliente.documento,
+                    cliente.telefono,
+                    cliente.correo
+                )
+            )
+
+            messagebox.showinfo(
+                "Éxito",
+                "Cliente registrado correctamente."
+            )
+
+            self.limpiar()
+
+        except Exception as error:
+
+            messagebox.showerror(
+                "Error",
+                str(error)
+            )
+
+    def limpiar(self):
+        """Limpia el formulario."""
+
+        self.codigo.delete(0, tk.END)
+        self.nombre.delete(0, tk.END)
+        self.documento.delete(0, tk.END)
+        self.telefono.delete(0, tk.END)
+        self.correo.delete(0, tk.END)

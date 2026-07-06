@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk
-
+from sistema import Sistema
 from vistas.clientes import VistaClientes
 
 class InterfazPrincipal:
@@ -30,8 +30,9 @@ class InterfazPrincipal:
 
         self.notebook.pack(expand=True, fill="both")
         
+        self.sistema = Sistema()
         # Cargar la vista
-        self.vista_clientes = VistaClientes(self.tab_clientes)
+        self.vista_clientes = VistaClientes(self.tab_clientes, self.sistema)
 
         # Barra de estado
         estado = tk.Label(
