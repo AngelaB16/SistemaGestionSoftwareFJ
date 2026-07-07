@@ -31,3 +31,22 @@
 2026-07-06 21:24:36,465 - INFO - Servicio agregado: laptops mante
 2026-07-06 21:24:46,227 - INFO - Servicio modificado: laptops mante
 2026-07-06 21:24:55,082 - INFO - Servicio eliminado: laptops mante
+2026-07-06 23:17:36,134 - INFO - Cliente registrado: Pepito
+2026-07-06 23:18:11,916 - INFO - Cliente modificado: Pepito Perez
+2026-07-06 23:18:27,790 - INFO - Cliente eliminado: Pepito Perez
+2026-07-07 01:14:06,715 - INFO - Cliente registrado: Juanita
+2026-07-07 01:31:00,036 - INFO - Cliente registrado: Juan
+2026-07-07 01:38:10,931 - INFO - Cliente registrado: Juanita
+2026-07-07 01:43:19,090 - INFO - Cliente registrado: Juanita
+2026-07-07 01:44:28,823 - INFO - Servicio agregado: Alquieler
+2026-07-07 01:54:03,660 - INFO - Cliente registrado: Juanita8
+2026-07-07 01:54:32,352 - INFO - Servicio agregado: Alquiler laptop
+2026-07-07 02:00:47,863 - INFO - Cliente registrado: Pepepito 2
+2026-07-07 02:01:12,571 - INFO - Servicio agregado: Capacitacion
+2026-07-07 02:01:28,552 - INFO - Reserva creada: 1
+2026-07-07 02:19:31,835 - INFO - Cliente registrado: Julia
+2026-07-07 02:20:20,347 - INFO - Servicio agregado: asesoria legal
+2026-07-07 02:20:37,889 - INFO - Reserva creada: 1
+2026-07-07 02:20:41,896 - INFO - Reserva confirmada: 1
+2026-07-07 02:20:46,645 - INFO - Reserva cancelada: 1
+2026-07-07 02:20:51,017 - INFO - Reserva eliminada: 1

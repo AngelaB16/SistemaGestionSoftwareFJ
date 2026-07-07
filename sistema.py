@@ -141,7 +141,7 @@ class Sistema:
         registrar_evento(
             f"Servicio eliminado: {servicio.nombre}"
         )
-        
+
     def modificar_servicio(self, codigo, nuevos_datos):
 
         servicio = self.buscar_servicio(codigo)
@@ -184,3 +184,54 @@ class Sistema:
 
         return self.reservas
     
+
+    def buscar_reserva(self, codigo):
+
+        codigo = str(codigo).strip()
+
+        for reserva in self.reservas:
+
+            if str(reserva.codigo).strip() == codigo:
+                return reserva
+
+        return None
+
+    def confirmar_reserva(self, codigo):
+
+        reserva = self.buscar_reserva(codigo)
+
+        if reserva is None:
+            raise ReservaError("Reserva no encontrada.")
+
+        reserva.confirmar()
+
+        registrar_evento(
+            f"Reserva confirmada: {codigo}"
+        )
+
+    def cancelar_reserva(self, codigo):
+
+        reserva = self.buscar_reserva(codigo)
+
+        if reserva is None:
+            raise ReservaError("Reserva no encontrada.")
+
+        reserva.cancelar()
+
+        registrar_evento(
+            f"Reserva cancelada: {codigo}"
+        )
+
+
+    def eliminar_reserva(self, codigo):
+
+        reserva = self.buscar_reserva(codigo)
+
+        if reserva is None:
+            raise ReservaError("Reserva no encontrada.")
+
+        self.reservas.remove(reserva)
+
+        registrar_evento(
+            f"Reserva eliminada: {codigo}"
+        )
