@@ -13,3 +13,10 @@
 2026-07-06 19:46:23,311 - INFO - Servicio agregado: Asesoria Python
 2026-07-06 19:51:17,852 - INFO - Servicio agregado: Asesoria
 2026-07-06 19:51:37,782 - ERROR - El servicio ya se encuentra registrado.
+2026-07-06 19:59:08,446 - INFO - Servicio agregado: prestamo equipo
+2026-07-06 20:03:10,421 - INFO - Servicio agregado: Asesoria
+2026-07-06 20:32:58,715 - INFO - Servicio agregado: pcs
+2026-07-06 20:36:34,714 - INFO - Servicio agregado: portatiles
+2026-07-06 20:50:19,593 - INFO - Servicio agregado: porta
+2026-07-06 20:51:42,095 - INFO - Servicio agregado: porta
+2026-07-06 20:51:46,600 - INFO - Servicio eliminado: porta

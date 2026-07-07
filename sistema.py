@@ -106,6 +106,42 @@ class Sistema:
 
         return self.servicios
 
+    def buscar_servicio(self, codigo):
+
+        print("Buscando código:", codigo, type(codigo))
+
+        for servicio in self.servicios:
+
+            print(
+                "Comparando con:",
+                servicio.codigo,
+                type(servicio.codigo)
+            )
+
+            if str(servicio.codigo).strip() == str(codigo).strip():
+                print("SERVICIO ENCONTRADO")
+                return servicio
+
+        print("NO ENCONTRADO")
+        return None
+
+    def eliminar_servicio(self, codigo):
+
+        servicio = self.buscar_servicio(codigo)
+
+        if servicio is None:
+
+            raise ServicioError(
+                "Servicio no encontrado."
+            )
+
+        self.servicios.remove(servicio)
+
+
+        registrar_evento(
+            f"Servicio eliminado: {servicio.nombre}"
+        )
+
     # RESERVAS
 
     def agregar_reserva(self, reserva):

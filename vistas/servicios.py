@@ -181,6 +181,18 @@ class VistaServicios:
             padx=5
         )
 
+        self.btn_eliminar = tk.Button(
+            botones,
+            text="Eliminar",
+            width=15,
+            command=self.eliminar_servicio
+        )
+
+        self.btn_eliminar.grid(
+            row=0,
+            column=2,
+            padx=5
+        )
 
         # Tabla
 
@@ -228,6 +240,10 @@ class VistaServicios:
             pady=15
         )
 
+        self.tabla.bind(
+            "<<TreeviewSelect>>",
+            self.seleccionar_servicio
+        )
 
     # Obtiene datos del formulario
 
@@ -290,9 +306,7 @@ class VistaServicios:
         try:
 
             datos = self.obtener_datos()
-
             servicio = self.crear_servicio(datos)
-
 
             self.sistema.agregar_servicio(
                 servicio
@@ -327,7 +341,6 @@ class VistaServicios:
                 str(error)
             )
 
-
     # Limpia formulario
 
     def limpiar(self):
@@ -353,3 +366,65 @@ class VistaServicios:
         )
 
         self.tipo.set("")
+
+
+    def seleccionar_servicio(self, event):
+
+        seleccion = self.tabla.focus()
+
+        if not seleccion:
+            return
+
+
+        datos = self.tabla.item(seleccion)["values"]
+
+
+        self.codigo.delete(0, tk.END)
+        self.nombre.delete(0, tk.END)
+        self.costo_base.delete(0, tk.END)
+
+
+        self.codigo.insert(0, datos[0])
+        self.nombre.insert(0, datos[1])
+
+    def eliminar_servicio(self):
+
+        seleccion = self.tabla.focus()
+
+
+        if not seleccion:
+
+            messagebox.showwarning(
+                "Advertencia",
+                "Seleccione un servicio."
+            )
+
+            return
+
+
+        datos = self.tabla.item(seleccion)["values"]
+
+
+        codigo = datos[0]
+
+
+        try:
+
+            self.sistema.eliminar_servicio(codigo)
+
+
+            self.tabla.delete(seleccion)
+
+
+            messagebox.showinfo(
+                "Éxito",
+                "Servicio eliminado correctamente."
+            )
+
+
+        except Exception as error:
+
+            messagebox.showerror(
+                "Error",
+                str(error)
+            )
