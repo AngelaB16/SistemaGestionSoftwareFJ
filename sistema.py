@@ -39,9 +39,11 @@ class Sistema:
     
     def buscar_cliente(self, documento):
 
+        documento = str(documento).strip()
+
         for cliente in self.clientes:
 
-            if cliente.documento == documento:
+            if str(cliente.documento).strip() == documento:
                 return cliente
 
         return None
@@ -112,3 +114,4 @@ class Sistema:
     def obtener_reservas(self):
 
         return self.reservas
+    

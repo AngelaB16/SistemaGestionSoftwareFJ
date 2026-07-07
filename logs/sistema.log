@@ -2,3 +2,9 @@
 2026-07-06 18:08:30,353 - INFO - Cliente registrado: Angela 2
 2026-07-06 18:50:56,622 - INFO - Cliente registrado: Juanita
 2026-07-06 18:52:04,724 - ERROR - El cliente ya se encuentra registrado.
+2026-07-06 18:59:32,496 - INFO - Cliente registrado: Pepito
+2026-07-06 19:03:28,998 - INFO - Cliente registrado: Pepito
+2026-07-06 19:03:37,894 - INFO - Cliente modificado: Pepito Perez
+2026-07-06 19:03:53,010 - INFO - Cliente modificado: Pepito Perez
+2026-07-06 19:07:35,463 - INFO - Cliente eliminado: Pepito Perez
+2026-07-06 19:07:39,786 - INFO - Cliente registrado: Pepito Perez

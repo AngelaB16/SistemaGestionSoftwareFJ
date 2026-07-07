@@ -218,13 +218,50 @@ class VistaClientes:
 
     def modificar_cliente(self):
 
-        from tkinter import messagebox
+        seleccion = self.tabla.focus()
 
-        messagebox.showinfo(
-            "Información",
-            "La función Modificar será implementada en el siguiente paso."
-        )
+        if not seleccion:
+            messagebox.showwarning(
+                "Advertencia",
+                "Seleccione un cliente."
+            )
+            return
 
+        datos_tabla = self.tabla.item(seleccion)["values"]
+
+        documento_original = datos_tabla[2]
+
+        datos = self.obtener_datos()
+
+        try:
+
+            self.sistema.modificar_cliente(
+                documento_original,
+                datos
+            )
+
+            self.tabla.item(
+                seleccion,
+                values=(
+                    datos["codigo"],
+                    datos["nombre"],
+                    datos["documento"],
+                    datos["telefono"],
+                    datos["correo"]
+                )
+            )
+
+            messagebox.showinfo(
+                "Éxito",
+                "Cliente modificado correctamente."
+            )
+
+        except Exception as error:
+
+            messagebox.showerror(
+                "Error",
+                str(error)
+            )
 
     def eliminar_cliente(self):
 
