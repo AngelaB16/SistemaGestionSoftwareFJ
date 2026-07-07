@@ -177,7 +177,7 @@ class VistaServicios:
 
         self.btn_limpiar.grid(
             row=0,
-            column=1,
+            column=3,
             padx=5
         )
 
@@ -194,15 +194,29 @@ class VistaServicios:
             padx=5
         )
 
+        self.btn_modificar = tk.Button(
+            botones,
+            text="Modificar",
+            width=15,
+            command=self.modificar_servicio
+        )
+
+        self.btn_modificar.grid(
+            row=0,
+            column=1,
+            padx=5
+        )
+
         # Tabla
 
         columnas = (
             "codigo",
             "nombre",
             "tipo",
-            "costo"
+            "costo_base",
+            "cantidad",
+            "costo_total"
         )
-
 
         self.tabla = ttk.Treeview(
             frame,
@@ -210,28 +224,20 @@ class VistaServicios:
             show="headings",
             height=10
         )
+        
+        self.tabla.heading("codigo", text="Código")
+        self.tabla.heading("nombre", text="Nombre")
+        self.tabla.heading("tipo", text="Tipo")
+        self.tabla.heading("costo_base", text="Costo Base")
+        self.tabla.heading("cantidad", text="Cantidad")
+        self.tabla.heading("costo_total", text="Costo Total")
 
-
-        self.tabla.heading(
-            "codigo",
-            text="Código"
-        )
-
-        self.tabla.heading(
-            "nombre",
-            text="Nombre"
-        )
-
-        self.tabla.heading(
-            "tipo",
-            text="Tipo"
-        )
-
-        self.tabla.heading(
-            "costo",
-            text="Costo"
-        )
-
+        self.tabla.column("codigo", width=90, anchor="center")
+        self.tabla.column("nombre", width=220)
+        self.tabla.column("tipo", width=180)
+        self.tabla.column("costo_base", width=110, anchor="center")
+        self.tabla.column("cantidad", width=90, anchor="center")
+        self.tabla.column("costo_total", width=130, anchor="center")
 
         self.tabla.pack(
             fill="both",
@@ -320,6 +326,8 @@ class VistaServicios:
                     servicio.codigo,
                     servicio.nombre,
                     datos["tipo"],
+                    datos["costo_base"],
+                    datos["cantidad"],
                     servicio.calcular_costo()
                 )
             )
@@ -375,17 +383,15 @@ class VistaServicios:
         if not seleccion:
             return
 
-
         datos = self.tabla.item(seleccion)["values"]
 
-
-        self.codigo.delete(0, tk.END)
-        self.nombre.delete(0, tk.END)
-        self.costo_base.delete(0, tk.END)
-
+        self.limpiar()
 
         self.codigo.insert(0, datos[0])
         self.nombre.insert(0, datos[1])
+        self.tipo.set(datos[2])
+        self.costo_base.insert(0, datos[3])
+        self.cantidad.insert(0, datos[4])
 
     def eliminar_servicio(self):
 
@@ -421,6 +427,57 @@ class VistaServicios:
                 "Servicio eliminado correctamente."
             )
 
+
+        except Exception as error:
+
+            messagebox.showerror(
+                "Error",
+                str(error)
+            )
+
+    def modificar_servicio(self):
+
+        seleccion = self.tabla.focus()
+
+        if not seleccion:
+
+            messagebox.showwarning(
+                "Advertencia",
+                "Seleccione un servicio."
+            )
+            return
+
+        codigo_original = self.tabla.item(seleccion)["values"][0]
+
+        try:
+
+            datos = self.obtener_datos()
+
+            self.sistema.modificar_servicio(
+                codigo_original,
+                datos
+            )
+
+            servicio = self.sistema.buscar_servicio(
+                datos["codigo"]
+            )
+
+            self.tabla.item(
+                seleccion,
+                values=(
+                    servicio.codigo,
+                    servicio.nombre,
+                    datos["tipo"],
+                    datos["costo_base"],
+                    datos["cantidad"],
+                    servicio.calcular_costo()
+                )
+            )
+
+            messagebox.showinfo(
+                "Éxito",
+                "Servicio modificado correctamente."
+            )
 
         except Exception as error:
 

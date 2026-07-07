@@ -141,7 +141,30 @@ class Sistema:
         registrar_evento(
             f"Servicio eliminado: {servicio.nombre}"
         )
+        
+    def modificar_servicio(self, codigo, nuevos_datos):
 
+        servicio = self.buscar_servicio(codigo)
+
+        if servicio is None:
+            raise ServicioError("Servicio no encontrado.")
+
+        servicio.nombre = nuevos_datos["nombre"]
+        servicio.costo_base = nuevos_datos["costo_base"]
+
+        # Actualizar atributo específico según el tipo
+        if hasattr(servicio, "capacidad"):
+            servicio.capacidad = nuevos_datos["cantidad"]
+
+        elif hasattr(servicio, "dias"):
+            servicio.dias = nuevos_datos["cantidad"]
+
+        elif hasattr(servicio, "horas"):
+            servicio.horas = nuevos_datos["cantidad"]
+
+        registrar_evento(
+            f"Servicio modificado: {servicio.nombre}"
+        )
     # RESERVAS
 
     def agregar_reserva(self, reserva):
