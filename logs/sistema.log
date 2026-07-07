@@ -50,3 +50,17 @@
 2026-07-07 02:20:41,896 - INFO - Reserva confirmada: 1
 2026-07-07 02:20:46,645 - INFO - Reserva cancelada: 1
 2026-07-07 02:20:51,017 - INFO - Reserva eliminada: 1
+2026-07-07 02:34:24,521 - INFO - Cliente registrado: Jose
+2026-07-07 02:34:57,755 - INFO - Cliente registrado: Pedrito
+2026-07-07 02:35:25,633 - INFO - Servicio agregado: Asesoria
+2026-07-07 02:35:49,565 - INFO - Servicio agregado: Laptop
+2026-07-07 02:36:38,945 - INFO - Servicio agregado: Reserva Sala General
+2026-07-07 02:37:15,950 - INFO - Reserva creada: 1
+2026-07-07 02:37:37,784 - INFO - Reserva creada: 2
+2026-07-07 02:38:05,498 - INFO - Reserva creada: 3
+2026-07-07 02:42:08,567 - INFO - Reserva confirmada: 1
+2026-07-07 02:42:12,670 - INFO - Reserva cancelada: 3
+2026-07-07 02:49:18,890 - INFO - Cliente registrado: daniel
+2026-07-07 02:49:50,530 - INFO - Servicio agregado: Asesoria
+2026-07-07 02:50:05,184 - INFO - Reserva creada: 1
+2026-07-07 02:50:10,197 - INFO - Reserva confirmada: 1

@@ -6,7 +6,7 @@ from sistema import Sistema
 from vistas.clientes import VistaClientes
 from vistas.servicios import VistaServicios
 from vistas.reservas import VistaReservas
-#from vistas.reportes import VistaReportes
+from vistas.reportes import VistaReportes
 
 class InterfazPrincipal:
 
@@ -39,7 +39,7 @@ class InterfazPrincipal:
         self.vista_clientes = VistaClientes(self.tab_clientes, self.sistema)
         self.vista_clientes = VistaServicios(self.tab_servicios, self.sistema)
         self.vista_clientes = VistaReservas(self.tab_reservas, self.sistema)
-        #self.vista_clientes = VistaReportes(self.tab_reportes, self.sistema)
+        self.vista_clientes = VistaReportes(self.tab_reportes, self.sistema)
 
 
         # Barra de estado
