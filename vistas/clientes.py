@@ -263,26 +263,6 @@ class VistaClientes:
                 str(error)
             )
 
-    def eliminar_cliente(self):
-
-        from tkinter import messagebox
-
-        seleccion = self.tabla.focus()
-
-        if not seleccion:
-
-            messagebox.showwarning(
-                "Advertencia",
-                "Seleccione un cliente."
-            )
-            return
-
-        self.tabla.delete(seleccion)
-
-        messagebox.showinfo(
-            "Éxito",
-            "Cliente eliminado de la tabla."
-        )
 
     def eliminar_cliente(self):
 

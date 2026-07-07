@@ -83,14 +83,24 @@ class Sistema:
 
         try:
 
+            for s in self.servicios:
+
+                if s.codigo == servicio.codigo:
+                    raise ServicioError(
+                        "El servicio ya se encuentra registrado."
+                    )
+
             self.servicios.append(servicio)
 
-            registrar_evento(f"Servicio agregado: {servicio.nombre}")
+            registrar_evento(
+                f"Servicio agregado: {servicio.nombre}"
+            )
 
         except Exception as error:
 
             registrar_error(str(error))
             raise
+
 
     def obtener_servicios(self):
 

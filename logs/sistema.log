@@ -8,3 +8,8 @@
 2026-07-06 19:03:53,010 - INFO - Cliente modificado: Pepito Perez
 2026-07-06 19:07:35,463 - INFO - Cliente eliminado: Pepito Perez
 2026-07-06 19:07:39,786 - INFO - Cliente registrado: Pepito Perez
+2026-07-06 19:44:37,925 - INFO - Servicio agregado: Sala Ejecutiva
+2026-07-06 19:45:36,273 - INFO - Servicio agregado: Portatal Dell
+2026-07-06 19:46:23,311 - INFO - Servicio agregado: Asesoria Python
+2026-07-06 19:51:17,852 - INFO - Servicio agregado: Asesoria
+2026-07-06 19:51:37,782 - ERROR - El servicio ya se encuentra registrado.
